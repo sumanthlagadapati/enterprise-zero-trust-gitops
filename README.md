@@ -146,6 +146,34 @@ graph TD
 
 ---
 
+## 🚀 Advanced Platform Engineering (Day 2 Operations)
+
+Beyond the standard EKS setup, this project implements advanced "Day 2" patterns to provide a true **Internal Developer Platform (IDP)** experience.
+
+### 1. Infrastructure-as-a-Product (Crossplane)
+Located in `advanced/crossplane/`, this implementation moves beyond standard IaC by using Kubernetes as a universal control plane.
+- **Composite Resource Definitions (XRDs)**: Define abstract infrastructure types like `SecureBucket`.
+- **Compositions**: Enforce security blueprints (Versioning, Encryption) automatically on the underlying AWS resources.
+- **Claims**: Provide a simple YAML-based interface for developers to request infrastructure without needing AWS console access.
+
+### 2. Automated Progressive Delivery (Argo Rollouts)
+Located in `advanced/argo-rollouts/`, this feature implements safe, hands-off deployments.
+- **Canary Strategy**: Gradually shifts traffic (20% -> 50% -> 100%) using **Istio VirtualServices**.
+- **Automated Analysis**: Uses an `AnalysisTemplate` to query **Prometheus** during the rollout. The deployment automatically rolls back if the success rate falls below 95%.
+- **mTLS Integration**: All canary traffic remains fully encrypted via Istio mTLS.
+
+---
+
+## 🗺️ Future Roadmap
+The following items are planned for future exploration:
+- **Chaos Engineering**: Implementing Chaos Mesh experiments for automated resiliency testing.
+- **Supply Chain Security**: Image signing with Cosign and verification with Kyverno.
+- **Karpenter**: Migrating from Cluster Autoscaler to high-performance node provisioning.
+- **Service Mesh Authorization**: Implementing JWT-based path-level security.
+- **FinOps**: Real-time cost monitoring and attribution via Kube-cost.
+
+---
+
 ## 📸 Screenshots
 
 ### ArgoCD - App-of-Apps Sync Status
