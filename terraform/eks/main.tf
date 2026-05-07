@@ -16,9 +16,9 @@ module "eks" {
   eks_managed_node_groups = {
     general = {
       instance_types = ["t3.medium"]
-      min_size     = 2
-      max_size     = 5
-      desired_size = 2
+      min_size       = 2
+      max_size       = 5
+      desired_size   = 2
 
       # Use Bottlerocket for enhanced security
       ami_type = "BOTTLEROCKET_x86_64"
@@ -32,7 +32,7 @@ module "eks" {
   }
 
   tags = {
-    Environment = var.environment
+    Environment  = var.environment
     Architecture = "ZeroTrust"
   }
 }
