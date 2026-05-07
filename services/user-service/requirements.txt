@@ -1,6 +1,6 @@
-fastapi==0.115.0
+fastapi==0.115.3
 uvicorn==0.30.0
 pydantic==2.8.2
-starlette>=0.40.0
+starlette==0.40.0
 wheel>=0.46.2
 jaraco.context>=6.1.0
