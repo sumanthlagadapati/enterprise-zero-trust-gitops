@@ -1,7 +1,7 @@
 # 🏦 Secure Fintech Platform: Zero Trust & GitOps on AWS EKS
 
-[![Terraform CI](https://github.com/your-org/enterprise-zero-trust-gitops/actions/workflows/terraform-ci.yml/badge.svg)](https://github.com/your-org/enterprise-zero-trust-gitops/actions/workflows/terraform-ci.yml)
-[![Service Build & Scan](https://github.com/your-org/enterprise-zero-trust-gitops/actions/workflows/app-ci.yml/badge.svg)](https://github.com/your-org/enterprise-zero-trust-gitops/actions/workflows/app-ci.yml)
+[![Terraform CI](https://github.com/sumanthlagadapati/enterprise-zero-trust-gitops/actions/workflows/terraform-ci.yml/badge.svg)](https://github.com/sumanthlagadapati/enterprise-zero-trust-gitops/actions/workflows/terraform-ci.yml)
+[![Service Build & Scan](https://github.com/sumanthlagadapati/enterprise-zero-trust-gitops/actions/workflows/app-ci.yml/badge.svg)](https://github.com/sumanthlagadapati/enterprise-zero-trust-gitops/actions/workflows/app-ci.yml)
 
 ## 🏗️ Architecture Overview
 
