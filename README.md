@@ -3,6 +3,19 @@
 [![Terraform CI](https://github.com/sumanthlagadapati/enterprise-zero-trust-gitops/actions/workflows/terraform-ci.yml/badge.svg)](https://github.com/sumanthlagadapati/enterprise-zero-trust-gitops/actions/workflows/terraform-ci.yml)
 [![Service Build & Scan](https://github.com/sumanthlagadapati/enterprise-zero-trust-gitops/actions/workflows/app-ci.yml/badge.svg)](https://github.com/sumanthlagadapati/enterprise-zero-trust-gitops/actions/workflows/app-ci.yml)
 
+## 🚀 Deployment Status
+The platform is fully operational with Zero-Trust security and automated hardening.
+
+### ✅ CI/CD Pipeline Success
+![Pipeline Success](docs/screenshots/pipeline_success.png)
+
+### 🛡️ Security Clearance (Trivy)
+All microservices are scanned and surgically hardened against HIGH/CRITICAL vulnerabilities.
+![User Service Security](docs/screenshots/trivy_clean_user_service.png)
+![Trading Service Security](docs/screenshots/trivy_clean_trading_service.png)
+
+---
+
 ## 🏗️ Architecture Overview
 
 This project implements a **Principal-level, Enterprise-Grade** microservices platform designed for high security, scalability, and observability. It simulates a production-ready fintech backend using a **Zero Trust Security Model** and **GitOps Continuous Delivery**.
