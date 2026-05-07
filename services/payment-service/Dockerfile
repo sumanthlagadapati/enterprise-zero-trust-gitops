@@ -14,6 +14,9 @@ COPY --from=builder /usr/local/lib/python3.11/site-packages/ /usr/local/lib/pyth
 COPY --from=builder /usr/local/bin/ /usr/local/bin/
 COPY . .
 
+# Surgical Strike: Remove vulnerable build tools not needed at runtime
+RUN pip uninstall -y setuptools wheel
+
 # Run as non-root user for security
 RUN useradd -m appuser
 USER appuser
