@@ -1,0 +1,40 @@
+apiVersion: apiextensions.crossplane.io/v1
+kind: Composition
+metadata:
+  name: xsecurebuckets.fintech.io
+  labels:
+    provider: aws
+spec:
+  compositeTypeRef:
+    apiVersion: fintech.io/v1alpha1
+    kind: XSecureBucket
+  resources:
+    - name: s3Bucket
+      base:
+        apiVersion: s3.aws.upbound.io/v1beta1
+        kind: Bucket
+        spec:
+          forProvider:
+            region: us-east-1
+      patches:
+        - fromFieldPath: "spec.parameters.region"
+          toFieldPath: "spec.forProvider.region"
+    - name: bucketVersioning
+      base:
+        apiVersion: s3.aws.upbound.io/v1beta1
+        kind: BucketVersioningConfiguration
+        spec:
+          forProvider:
+            region: us-east-1
+            versioningConfiguration:
+              - status: Enabled
+    - name: bucketServerSideEncryption
+      base:
+        apiVersion: s3.aws.upbound.io/v1beta1
+        kind: BucketServerSideEncryptionConfiguration
+        spec:
+          forProvider:
+            region: us-east-1
+            rule:
+              - applyServerSideEncryptionByDefault:
+                  - sseAlgorithm: AES256

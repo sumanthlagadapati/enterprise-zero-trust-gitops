@@ -1,0 +1,8 @@
+apiVersion: fintech.io/v1alpha1
+kind: SecureBucket
+metadata:
+  name: user-uploads
+  namespace: default
+spec:
+  parameters:
+    region: us-east-1
