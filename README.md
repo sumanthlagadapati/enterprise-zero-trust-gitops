@@ -189,14 +189,25 @@ The following items are planned for future exploration:
 
 ## 📸 Screenshots
 
-### ArgoCD - App-of-Apps Sync Status
-![ArgoCD Dashboard](screenshots/argocd_dashboard.png)
+### 🛡️ GitHub Actions - DevSecOps Pipeline Success
+The pipeline automatically hardens images and verifies security before deployment.
 
-### Grafana - Fintech Platform Overview
-![Grafana Dashboard](screenshots/grafana_dashboard.png)
+![Run Summary](docs/screenshots/github_actions_run_summary.png)
+*Figure 1: Full green pipeline for all microservices.*
 
-### GitHub Actions - DevSecOps Pipeline Success
-![GitHub Actions](screenshots/github_actions.png)
+![Trivy Deep Dive](docs/screenshots/github_actions_trivy_deep_dive.png)
+*Figure 2: Surgical security scan showing 0 vulnerabilities.*
+
+![ECR Push Success](docs/screenshots/github_actions_ecr_push_deep_dive.png)
+*Figure 3: Secure image delivery to Amazon ECR.*
+
+### ☸️ ArgoCD - App-of-Apps Sync Status
+*(Upload your ArgoCD dashboard screenshot to `docs/screenshots/argocd_dashboard.png`)*
+![ArgoCD Dashboard](docs/screenshots/argocd_dashboard.png)
+
+### 📊 Grafana - Fintech Platform Overview
+*(Upload your Grafana dashboard screenshot to `docs/screenshots/grafana_dashboard.png`)*
+![Grafana Dashboard](docs/screenshots/grafana_dashboard.png)
 
 ---
 
