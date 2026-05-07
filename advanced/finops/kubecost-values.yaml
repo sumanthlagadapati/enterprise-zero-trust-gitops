@@ -1,0 +1,12 @@
+kubecostProductConfigs:
+  clusterName: fintech-platform-prod
+  currencyCode: USD
+  # Cloud Cost Integration (AWS)
+  awsAccountID: "123456789012"
+  spotLabel: "karpenter.sh/capacity-type"
+  spotLabelValue: "spot"
+
+prometheus:
+  enabled: false # Use existing Prometheus stack
+  server:
+    address: http://prometheus-kube-prometheus-stack-prometheus.monitoring.svc:9090
