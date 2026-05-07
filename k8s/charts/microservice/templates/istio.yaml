@@ -1,0 +1,26 @@
+{{- if .Values.istio.enabled }}
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: {{ include "microservice.fullname" . }}
+spec:
+  hosts:
+    - {{ include "microservice.fullname" . }}
+  http:
+    - route:
+        - destination:
+            host: {{ include "microservice.fullname" . }}
+            port:
+              number: {{ .Values.service.port }}
+
+---
+{{- if .Values.istio.mtls }}
+apiVersion: security.istio.io/v1beta1
+kind: PeerAuthentication
+metadata:
+  name: {{ include "microservice.fullname" . }}-mtls
+spec:
+  mtls:
+    mode: STRICT
+{{- end }}
+{{- end }}
