@@ -6,11 +6,22 @@ spec:
   replicas: 5
   strategy:
     canary:
+      canaryService: user-service-canary
+      stableService: user-service-stable
+      trafficRouting:
+        istio:
+          virtualService:
+            name: user-service-vsvc
+            routes:
+            - primary # stable
       steps:
       - setWeight: 20
-      - pause: { duration: 10m }
+      - pause: { duration: 5m }
+      - analysis:
+          templates:
+          - templateName: success-rate
       - setWeight: 50
-      - pause: { duration: 10m }
+      - pause: { duration: 5m }
   selector:
     matchLabels:
       app: user-service
