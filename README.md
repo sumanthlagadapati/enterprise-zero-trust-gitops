@@ -109,13 +109,17 @@ graph TD
 
 ---
 
-## 📊 Observability & SRE
+## 📊 Observability & SRE (GitOps Deployed)
 
-- **Prometheus**: Collects golden signals (Latency, Traffic, Errors, Saturation).
-- **Grafana**: Centralized dashboards for cluster health and business performance.
+The complete observability stack is deployed natively via ArgoCD, ensuring infrastructure-as-code principles apply to our monitoring.
+
+- **Prometheus & Grafana (`kube-prometheus-stack`)**: Automatically deployed into the `monitoring` namespace via Helm in ArgoCD.
+- **Dynamic Dashboard Discovery**: Grafana sidecars are configured to auto-discover ConfigMaps labeled `grafana_dashboard: "1"`.
+- **Custom APM Dashboards**:
+  - **Fintech Platform Overview**: A global view displaying total system request rates and p95 latencies across the Istio mesh.
+  - **Microservices APM**: A specialized dashboard strictly monitoring FastAPI metrics (HTTP 5xx errors, p99 response times) specifically for the `user-service`, `trading-service`, and `payment-service`.
 - **Loki**: Log aggregation with correlation to Prometheus metrics.
-- **Alerting**: Alertmanager routes critical alerts (e.g., Pod Restarts, High Latency) to designated receivers.
-
+- **Alertmanager**: Routes critical alerts (e.g., Pod Restarts, High Latency) to designated receivers.
 ---
 
 ## 💰 Cost Optimization & DR Strategy
