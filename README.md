@@ -181,6 +181,28 @@ Located in `advanced/argo-rollouts/`, this feature implements safe, hands-off de
 
 ---
 
+## 🛠️ Key Findings & Troubleshooting (Lessons Learned)
+
+Building a production-grade cluster from scratch presents real-world engineering challenges. Here are the key technical hurdles overcome in this project:
+
+1. **ArgoCD CRD Constraints (`metadata.annotations: Too long`)**:
+   - **Issue**: Deploying the official ArgoCD manifest via `kubectl apply` failed due to Kubernetes annotation size limits on massive CustomResourceDefinitions.
+   - **Resolution**: Utilized the `--server-side` flag (`kubectl apply --server-side -n argocd -f ...`) to bypass client-side annotation size constraints and successfully bootstrap the GitOps controller.
+
+2. **AWS EKS Authentication (`the server has asked for the client to provide credentials`)**:
+   - **Issue**: Attempting to run `kubectl` locally returned unauthorized errors, even after running `aws eks update-kubeconfig`. This occurs because EKS defaults to granting `system:masters` only to the IAM role that provisioned the cluster via Terraform.
+   - **Resolution**: Explicitly mapped the local developer IAM User to the cluster using the new EKS access entries API:
+     ```bash
+     aws eks create-access-entry --cluster-name fintech-platform-prod --principal-arn arn:aws:iam::<ACCOUNT_ID>:user/devops-user
+     aws eks associate-access-policy --cluster-name fintech-platform-prod --principal-arn arn:aws:iam::<ACCOUNT_ID>:user/devops-user --policy-arn arn:aws:eks::aws:cluster-access-policy/AmazonEKSClusterAdminPolicy --access-scope type=cluster
+     ```
+
+3. **Supply Chain 'Ghost' Vulnerabilities**:
+   - **Issue**: High-severity CVEs in `setuptools` and `wheel` were persisting in the final Docker image despite upgrading them, because they were deeply vendored inside the Python base image's tools.
+   - **Resolution**: Implemented a "Surgical Strike" in the multi-stage Dockerfile by running `pip uninstall -y setuptools wheel` in the final stage, reducing the attack surface and achieving a 100% clean Trivy scan.
+
+---
+
 ## 🗺️ Future Roadmap
 The following items are planned for future exploration:
 - **Chaos Engineering**: Implementing Chaos Mesh experiments for automated resiliency testing.
