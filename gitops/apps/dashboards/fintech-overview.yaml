@@ -1,0 +1,93 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: fintech-platform-overview
+  namespace: monitoring
+  labels:
+    grafana_dashboard: "1"
+data:
+  fintech-overview.json: |-
+    {
+      "annotations": {
+        "list": [
+          {
+            "builtIn": 1,
+            "datasource": "-- Grafana --",
+            "enable": true,
+            "hide": true,
+            "iconColor": "rgba(0, 211, 255, 1)",
+            "name": "Annotations & Alerts",
+            "type": "dashboard"
+          }
+        ]
+      },
+      "editable": true,
+      "gnetId": null,
+      "graphTooltip": 0,
+      "id": 1,
+      "links": [],
+      "panels": [
+        {
+          "type": "text",
+          "title": "Welcome to the Secure Fintech Platform",
+          "gridPos": {
+            "x": 0,
+            "y": 0,
+            "w": 24,
+            "h": 3
+          },
+          "options": {
+            "content": "# Fintech Platform Overview\nThis dashboard provides a high-level view of the microservices performance, system latency, and Zero-Trust mTLS metrics.",
+            "mode": "markdown"
+          }
+        },
+        {
+          "type": "timeseries",
+          "title": "Global Request Rate",
+          "gridPos": {
+            "x": 0,
+            "y": 3,
+            "w": 12,
+            "h": 8
+          },
+          "targets": [
+            {
+              "expr": "sum(rate(istio_requests_total{reporter=\"destination\"}[5m])) by (destination_workload)",
+              "legendFormat": "{{destination_workload}}"
+            }
+          ]
+        },
+        {
+          "type": "timeseries",
+          "title": "Service Latency (p95)",
+          "gridPos": {
+            "x": 12,
+            "y": 3,
+            "w": 12,
+            "h": 8
+          },
+          "targets": [
+            {
+              "expr": "histogram_quantile(0.95, sum(rate(istio_request_duration_milliseconds_bucket{reporter=\"destination\"}[5m])) by (le, destination_workload))",
+              "legendFormat": "{{destination_workload}}"
+            }
+          ]
+        }
+      ],
+      "refresh": "5s",
+      "schemaVersion": 30,
+      "style": "dark",
+      "tags": ["fintech", "zero-trust", "istio"],
+      "templating": {
+        "list": []
+      },
+      "time": {
+        "from": "now-1h",
+        "to": "now"
+      },
+      "timepicker": {},
+      "timezone": "",
+      "title": "Fintech Platform Overview",
+      "uid": "fintech-overview-01",
+      "version": 1
+    }
